@@ -5,6 +5,7 @@ import android.content.pm.PackageManager;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.view.View;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -16,6 +17,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
+    private boolean mapMode;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +29,20 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mapFragment.getMapAsync(this);
     }
 
+
+    public void onClick(View v)
+    {
+        if(mapMode)
+        {
+            mMap.setMapType(GoogleMap.MAP_TYPE_SATELLITE);
+            mapMode = !mapMode;
+        }
+        else
+        {
+            mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+            mapMode = !mapMode;
+        }
+    }
 
     /**
      * Manipulates the map once available.
