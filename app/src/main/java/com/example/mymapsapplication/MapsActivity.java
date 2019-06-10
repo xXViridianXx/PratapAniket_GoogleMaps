@@ -60,6 +60,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private GoogleMap mMap;
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     private boolean mapMode;
     private LocationManager locationManager;
     private boolean isGPSEnabled = false;
@@ -79,6 +80,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private boolean isGPSEnabled = false;
     private boolean isNetworkEnabled = false;
 =======
+=======
+>>>>>>> c8145c34206f5dfe4353f60b6565d17c10484460
 
     private EditText locationSearch;
     private LocationManager locationManager;
@@ -86,6 +89,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private boolean gotMyLocationOneTime;
     private boolean isGPSEnabled = false;
     private boolean isNetworkEnabled = false;
+<<<<<<< HEAD
+>>>>>>> c8145c34206f5dfe4353f60b6565d17c10484460
+=======
 >>>>>>> c8145c34206f5dfe4353f60b6565d17c10484460
     private boolean canGetLocation = false;
     private double latitude, longitude;
@@ -97,6 +103,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private static final float MIN_DISTANCE_CHANGE_FOR_UPDATES = 0.0f;
     private static final int MY_LOC_ZOOM_FACTOR = 17;
 <<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> c8145c34206f5dfe4353f60b6565d17c10484460
+=======
 >>>>>>> c8145c34206f5dfe4353f60b6565d17c10484460
 =======
 >>>>>>> c8145c34206f5dfe4353f60b6565d17c10484460
@@ -114,6 +123,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     public void onClick(View v) {
         if (mapMode) {
             mMap.setMapType(GoogleMap.MAP_TYPE_SATELLITE);
@@ -124,6 +134,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
     }
 
+=======
+>>>>>>> c8145c34206f5dfe4353f60b6565d17c10484460
 =======
 >>>>>>> c8145c34206f5dfe4353f60b6565d17c10484460
 =======
@@ -160,6 +172,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
          */
         locationSearch = findViewById(R.id.editText_addr);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
         gotMyLocationOneTime = false;
         getLocation();
@@ -188,6 +201,36 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 CameraUpdate update = CameraUpdateFactory.newLatLngZoom(userLocation, MY_LOC_ZOOM_FACTOR);
                 if (provider.equals(LocationManager.GPS_PROVIDER)) {
 
+=======
+
+        gotMyLocationOneTime = false;
+        getLocation();
+    }
+
+    public void changeView(View view) {
+        if (mMap.getMapType() == GoogleMap.MAP_TYPE_NORMAL)
+            mMap.setMapType(GoogleMap.MAP_TYPE_SATELLITE);
+        else mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+    }
+
+    public void dropAMarker(String provider) {
+        if (locationManager != null) {
+            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED
+                    && ActivityCompat.checkSelfPermission(MapsActivity.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                return;
+            }
+
+            LatLng userLocation = null;
+            myLocation = locationManager.getLastKnownLocation(provider);
+
+            if (myLocation == null) {
+                Log.d("MyMapsApp", "myLocation is null");
+            } else {
+                userLocation = new LatLng(myLocation.getLatitude(), myLocation.getLongitude());
+                CameraUpdate update = CameraUpdateFactory.newLatLngZoom(userLocation, MY_LOC_ZOOM_FACTOR);
+                if (provider.equals(LocationManager.GPS_PROVIDER)) {
+
+>>>>>>> c8145c34206f5dfe4353f60b6565d17c10484460
 =======
 
         gotMyLocationOneTime = false;
@@ -246,6 +289,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             isGPSEnabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
             if (isGPSEnabled)
                 Log.d("MyMaps", "getLocation: Network is enabled");
 
@@ -275,6 +319,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             if (isNetworkEnabled) Log.d("MyMap", "getLocation: Network enabled");
 
 >>>>>>> c8145c34206f5dfe4353f60b6565d17c10484460
+=======
+            if (isGPSEnabled) Log.d("MyMap", "getLocation: GPS is enabled");
+
+            //get Network status
+            isNetworkEnabled = locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
+            if (isNetworkEnabled) Log.d("MyMap", "getLocation: Network enabled");
+
+>>>>>>> c8145c34206f5dfe4353f60b6565d17c10484460
             if (!isGPSEnabled && !isNetworkEnabled) {
                 Log.d("MyMap", "getLocation: No provider is enabled!");
             } else {
@@ -283,6 +335,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
                             || ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
 <<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> c8145c34206f5dfe4353f60b6565d17c10484460
+=======
 >>>>>>> c8145c34206f5dfe4353f60b6565d17c10484460
 =======
 >>>>>>> c8145c34206f5dfe4353f60b6565d17c10484460
@@ -293,6 +348,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                         //                                          int[] grantResults)
                         // to handle the case where the user grants the permission. See the documentation
                         // for ActivityCompat#requestPermissions for more details.
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
                         return;
@@ -315,6 +371,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 }
                 if (isGPSEnabled) {
 >>>>>>> c8145c34206f5dfe4353f60b6565d17c10484460
+=======
+                        locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, MIN_TIME_BW_UPDATES, MIN_DISTANCE_CHANGE_FOR_UPDATES,
+                                locationListenerNetwork);
+                    }
+                }
+                if (isGPSEnabled) {
+>>>>>>> c8145c34206f5dfe4353f60b6565d17c10484460
                     Log.d("MyMap", "getLocation: no GPS is enabled!");
                     if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
                             || ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
@@ -329,6 +392,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                                 locationListenerGPS);
                     }
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> c8145c34206f5dfe4353f60b6565d17c10484460
                 }
             }
@@ -336,6 +400,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 <<<<<<< HEAD
             //log
 =======
+            Log.d("MyMapsApp", "MapsActivity:getLocation exception");
+>>>>>>> c8145c34206f5dfe4353f60b6565d17c10484460
+=======
+                }
+            }
+        } catch (Exception e) {
             Log.d("MyMapsApp", "MapsActivity:getLocation exception");
 >>>>>>> c8145c34206f5dfe4353f60b6565d17c10484460
 =======
@@ -385,6 +455,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     }
 
+<<<<<<< HEAD
     public void onSearch(View v) {
         String location = locationSearch.getText().toString();
 
@@ -421,6 +492,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     }
 
+=======
+>>>>>>> c8145c34206f5dfe4353f60b6565d17c10484460
 
     LocationListener locationListenerNetwork = new LocationListener() {
 
@@ -476,6 +549,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     break;
             }
         }
+<<<<<<< HEAD
 
         @Override
         public void onProviderEnabled(String provider) {
@@ -818,5 +892,70 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 }
 >>>>>>> c8145c34206f5dfe4353f60b6565d17c10484460
 =======
+}
+>>>>>>> c8145c34206f5dfe4353f60b6565d17c10484460
+=======
+
+        @Override
+        public void onProviderEnabled(String provider) {
+
+        }
+
+        @Override
+        public void onProviderDisabled(String provider) {
+
+        }
+    };
+
+    LocationListener locationListenerGPS = new LocationListener() {
+        @Override
+        public void onLocationChanged(Location location) {
+            Toast.makeText(MapsActivity.this, "GPS onLocationChanged", Toast.LENGTH_SHORT).show();
+            dropAMarker(LocationManager.GPS_PROVIDER);
+            locationManager.removeUpdates(locationListenerNetwork);
+        }
+
+        @Override
+        public void onStatusChanged(String provider, int status, Bundle extras) {
+            switch (status) {
+                case LocationProvider.AVAILABLE:
+                    String status0 = "AVAILABLE";
+                    Log.d("MyMapsApp", "onStatusChanged: status = " + status0 + ", location is updating");
+                    Toast.makeText(getApplicationContext(), "onStatusChanged: Location Status = " + status + ", updating", Toast.LENGTH_SHORT).show();
+                    break;
+
+                case LocationProvider.OUT_OF_SERVICE:
+                    String status1 = "OUT_OF_SERVICE";
+                    Log.d("MyMapsApp", "onStatusChanged: status = " + status1);
+                    if (ActivityCompat.checkSelfPermission(MapsActivity.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
+                            && ActivityCompat.checkSelfPermission(MapsActivity.this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                        return;
+                    }
+                    locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, MIN_TIME_BW_UPDATES, MIN_DISTANCE_CHANGE_FOR_UPDATES, locationListenerNetwork);
+                    break;
+                case LocationProvider.TEMPORARILY_UNAVAILABLE:
+                    String status2 = "TEMPORARILY_UNAVAILABLE";
+                    Log.d("MyMapsApp", "onStatusChanged: status = " + status2);
+                    locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, MIN_TIME_BW_UPDATES, MIN_DISTANCE_CHANGE_FOR_UPDATES, locationListenerNetwork);
+                    locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, MIN_TIME_BW_UPDATES, MIN_DISTANCE_CHANGE_FOR_UPDATES, locationListenerNetwork);
+                    break;
+                default:
+                    locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, MIN_TIME_BW_UPDATES, MIN_DISTANCE_CHANGE_FOR_UPDATES, locationListenerNetwork);
+                    locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, MIN_TIME_BW_UPDATES, MIN_DISTANCE_CHANGE_FOR_UPDATES, locationListenerNetwork);
+                    break;
+            }
+        }
+
+        @Override
+        public void onProviderEnabled(String provider) {
+
+        }
+
+        @Override
+        public void onProviderDisabled(String provider) {
+
+        }
+    };
+
 }
 >>>>>>> c8145c34206f5dfe4353f60b6565d17c10484460
